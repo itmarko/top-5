@@ -1,11 +1,11 @@
 package com.project.backend.Service;
 
-import com.project.backend.Model.City;
-import com.project.backend.Model.State;
-import com.project.backend.Exception.DuplicateEntryException;
-import com.project.backend.Repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.project.backend.Model.City;
+import com.project.backend.Repository.CityRepository;
+import com.project.backend.Model.State;
+import com.project.backend.Exception.DuplicateEntryException;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +38,12 @@ public class CityService {
         return cityRepository.findAll();
     }
 
-    public Optional<City> getCityById(Long id) {
-        return cityRepository.findById(id);
+//    public Optional<City> getCityById(Long id) {
+//        return cityRepository.findById(id);
+//    }
+
+    // New method to find city by name
+    public Optional<City> getCityByName(String cityName) {
+        return cityRepository.findByCity(cityName);
     }
 }
