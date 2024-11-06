@@ -1,0 +1,13 @@
+[
+  { "name": "Ambala", "img": "https://via.placeholder.com/300" },
+  { "name": "Chandigarh", "img": "https://via.placeholder.com/300" },
+  { "name": "Mohali", "img": "https://via.placeholder.com/300" },
+  { "name": "Ludhiana", "img": "https://via.placeholder.com/300" },
+  { "name": "Gurugram", "img": "https://via.placeholder.com/300" },
+  { "name": "North Delhi", "img": "https://via.placeholder.com/300" },
+  { "name": "Shimla", "img": "https://via.placeholder.com/300" },
+  { "name": "Mumbai", "img": "https://via.placeholder.com/300" },
+  { "name": "Manali", "img": "https://via.placeholder.com/300" },
+  { "name": "Pune", "img": "https://via.placeholder.com/300" },
+  { "name": "South Delhi", "img": "https://via.placeholder.com/300" }
+]
