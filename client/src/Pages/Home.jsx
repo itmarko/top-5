@@ -12,7 +12,10 @@ const HeroSection = () => {
     let shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Swap elements
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ]; // Swap elements
     }
     return shuffledArray;
   };
@@ -21,7 +24,7 @@ const HeroSection = () => {
     const fetchCities = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/cities");
-        
+
         const randomCities = shuffleArray(response.data).slice(0, 11);
         setCities(randomCities);
         console.log("Fetched cities:", randomCities); // Log fetched data to check
@@ -29,7 +32,7 @@ const HeroSection = () => {
         if (error.response) {
           console.error("Error fetching city data:", error.response.data);
         } else {
-          console.error("Error fetching city data:", error.message); 
+          console.error("Error fetching city data:", error.message);
         }
       }
     };
@@ -52,17 +55,46 @@ const HeroSection = () => {
 
           {/* Search Bar */}
           <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-4xl bg-white p-2 rounded-lg shadow-lg mb-8 mt-6">
-            <input
-              type="text"
-              placeholder="Search City"
-              className="w-full md:w-1/2 p-2 border outline-none rounded-md"
-            />
-            <input
-              type="text"
-              placeholder="Search Category"
-              className="w-full md:w-1/3 p-2 border-t md:border-t-0 md:border-l border-gray-300 rounded-r-md outline-none"
-            />
-            <button className="bg-gray-900 text-white p-2 md:px-6 rounded-md mt-4 md:mt-0">
+            <div className="relative w-full md:w-1/2">
+              <input
+                type="text"
+                placeholder="Search City"
+                className="w-full p-2 pl-8 pr-10 border-none outline-none rounded-md"
+              />
+              <svg
+              className="absolute right-0 top-1/2  transform -translate-y-1/2 h-6 w-6 text-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="-2.5 -2.5 24 24"
+                width="28"
+                fill="currentColor"
+              >
+                <path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414z"></path>
+              </svg>
+            </div>
+
+            <div className="relative w-full md:w-1/3 mt-4 md:mt-0 md:ml-4">
+              <input
+                type="text"
+                placeholder="Search Category"
+                className="w-full p-2 pl-10 border-none outline-none rounded-md "
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+
+            <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl  focus:outline-none focus:from-fuchsia-600 dark:focus:to-blue-800  p-1 md:px-6 rounded-md mt-4 md:mt-0">
               Search now
             </button>
           </div>
