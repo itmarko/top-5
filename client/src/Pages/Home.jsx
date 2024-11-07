@@ -8,14 +8,23 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const [cities, setCities] = useState([]);
-
+  const shuffleArray = (array) => {
+    let shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Swap elements
+    }
+    return shuffledArray;
+  };
   // Fetch cities data from backend API using Axios
   useEffect(() => {
     const fetchCities = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/cities");
-        setCities(response.data); // Set the fetched cities data
-        console.log("Fetched cities:", response.data); // Log fetched data to check
+        
+        const randomCities = shuffleArray(response.data).slice(0, 11);
+        setCities(randomCities);
+        console.log("Fetched cities:", randomCities); // Log fetched data to check
       } catch (error) {
         if (error.response) {
           console.error("Error fetching city data:", error.response.data);
@@ -72,7 +81,7 @@ const HeroSection = () => {
                   alt={city.city}
                   className="rounded-lg shadow-xl h-24 w-44 md:h-52 md:w-44 object-cover"
                 />
-                <p className="mt-2">{city.city}</p>
+                <p className="mt-2 font-bold text-xl">{city.city}</p>
               </div>
             ))}
             <div className="flex flex-col items-center bg-blue-600 h-24 w-24 md:h-52 md:w-44 rounded-lg shadow-xl">
