@@ -13,16 +13,14 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/cities", {
-          withCredentials: true, // Include cookies if needed (for authentication)
-        });
+        const response = await axios.get("http://localhost:8080/api/cities");
         setCities(response.data); // Set the fetched cities data
         console.log("Fetched cities:", response.data); // Log fetched data to check
       } catch (error) {
         if (error.response) {
-          console.error("Error fetching city data:", error.response.data); // Log response error details
+          console.error("Error fetching city data:", error.response.data);
         } else {
-          console.error("Error fetching city data:", error.message); // Log error message if no response
+          console.error("Error fetching city data:", error.message); 
         }
       }
     };
@@ -71,10 +69,10 @@ const HeroSection = () => {
               <div key={index} className="flex flex-col items-center">
                 <img
                   src={`data:image/jpeg;base64,${city.image}`} // Assuming the image is stored as base64 in your DB
-                  alt={city.name}
+                  alt={city.city}
                   className="rounded-lg shadow-xl h-24 w-44 md:h-52 md:w-44 object-cover"
                 />
-                <p className="mt-2">{city.name}</p>
+                <p className="mt-2">{city.city}</p>
               </div>
             ))}
             <div className="flex flex-col items-center bg-blue-600 h-24 w-24 md:h-52 md:w-44 rounded-lg shadow-xl">

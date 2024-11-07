@@ -42,7 +42,7 @@ public class CityController {
 		}
 	}
 
-	@GetMapping
+	@GetMapping()
 	public List<CityResponseDTO> getAllCities() {
 		List<City> cities = cityService.getAllCities();
 		List<CityResponseDTO> response = cities.stream()
