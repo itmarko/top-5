@@ -29,6 +29,7 @@ public class City {
 
 	@OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
 	private List<BusinessInfo> businesses = new ArrayList<>();
+	
 	@Lob
 	private byte[] image;
 

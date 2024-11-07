@@ -5,16 +5,16 @@ public class LocationResponseDTO {
 	private String country;
 	private String state;
 	private String city;
-	private byte[] cityImage;
+	private byte[] image;
 
 	public LocationResponseDTO() {
 	}
 
-	public LocationResponseDTO(String country, String state, String city, byte[] cityImage) {
+	public LocationResponseDTO(String country, String state, String city, byte[] image) {
 		this.country = country;
 		this.state = state;
 		this.city = city;
-		this.cityImage = cityImage;
+		this.image = image;
 	}
 
 	public String getCountry() {
@@ -41,12 +41,12 @@ public class LocationResponseDTO {
 		this.city = city;
 	}
 
-	public byte[] getCityImage() {
-		return cityImage;
+	public byte[] getImage() {
+		return image;
 	}
 
-	public void setCityImage(byte[] cityImage) {
-		this.cityImage = cityImage;
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

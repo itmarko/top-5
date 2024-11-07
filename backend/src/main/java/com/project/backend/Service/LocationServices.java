@@ -1,9 +1,13 @@
 package com.project.backend.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.backend.DTO.LocationDTO;
+import com.project.backend.DTO.LocationResponseDTO;
 import com.project.backend.Model.City;
 import com.project.backend.Model.Country;
 import com.project.backend.Model.State;
@@ -13,6 +17,7 @@ import com.project.backend.Repository.StateRepository;
 
 @Service
 public class LocationServices {
+
 	private final CountryRepository countryRepository;
 	private final StateRepository stateRepository;
 	private final CityRepository cityRepository;
@@ -37,17 +42,27 @@ public class LocationServices {
 			newState.setState(locationDTO.getState());
 			newState.setCountry(country);
 			return stateRepository.save(newState);
-
 		});
-		
+
 		City city = cityRepository.findByCityAndState(locationDTO.getCity(), state).orElseGet(() -> {
 			City newCity = new City();
 			newCity.setCity(locationDTO.getCity());
 			newCity.setState(state);
-			newCity.setImage(locationDTO.getCityImage());
+
+			if (locationDTO.getImage() != null && locationDTO.getImage().length > 0) {
+				newCity.setImage(locationDTO.getImage());
+			}
+
 			return cityRepository.save(newCity);
 		});
+
 		return city;
 	}
 
+	public List<LocationResponseDTO> getAllCities() {
+		return cityRepository.findAll().stream()
+				.map(city -> new LocationResponseDTO(city.getState().getCountry().getCountry(),
+						city.getState().getState(), city.getCity(), city.getImage()))
+				.collect(Collectors.toList());
+	}
 }

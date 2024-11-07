@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+
 const indianStates = [
   "Andhra Pradesh",
   "Arunachal Pradesh",
@@ -37,16 +38,211 @@ const indianStates = [
   "Puducherry",
 ];
 
+const countries = [
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Andorra",
+  "Angola",
+  "Antigua and Barbuda",
+  "Argentina",
+  "Armenia",
+  "Australia",
+  "Austria",
+  "Azerbaijan",
+  "Bahamas",
+  "Bahrain",
+  "Bangladesh",
+  "Barbados",
+  "Belarus",
+  "Belgium",
+  "Belize",
+  "Benin",
+  "Bhutan",
+  "Bolivia",
+  "Bosnia and Herzegovina",
+  "Botswana",
+  "Brazil",
+  "Brunei",
+  "Bulgaria",
+  "Burkina Faso",
+  "Burundi",
+  "Cabo Verde",
+  "Cambodia",
+  "Cameroon",
+  "Canada",
+  "Central African Republic",
+  "Chad",
+  "Chile",
+  "China",
+  "Colombia",
+  "Comoros",
+  "Costa Rica",
+  "Croatia",
+  "Cuba",
+  "Cyprus",
+  "Czech Republic",
+  "Denmark",
+  "Djibouti",
+  "Dominica",
+  "Dominican Republic",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Eritrea",
+  "Estonia",
+  "Eswatini",
+  "Ethiopia",
+  "Fiji",
+  "Finland",
+  "France",
+  "Gabon",
+  "Gambia",
+  "Georgia",
+  "Germany",
+  "Ghana",
+  "Greece",
+  "Grenada",
+  "Guatemala",
+  "Guinea",
+  "Guinea-Bissau",
+  "Guyana",
+  "Haiti",
+  "Honduras",
+  "Hungary",
+  "Iceland",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Ireland",
+  "Israel",
+  "Italy",
+  "Jamaica",
+  "Japan",
+  "Jordan",
+  "Kazakhstan",
+  "Kenya",
+  "Kiribati",
+  "Korea (North)",
+  "Korea (South)",
+  "Kuwait",
+  "Kyrgyzstan",
+  "Laos",
+  "Latvia",
+  "Lebanon",
+  "Lesotho",
+  "Liberia",
+  "Libya",
+  "Liechtenstein",
+  "Lithuania",
+  "Luxembourg",
+  "Madagascar",
+  "Malawi",
+  "Malaysia",
+  "Maldives",
+  "Mali",
+  "Malta",
+  "Marshall Islands",
+  "Mauritania",
+  "Mauritius",
+  "Mexico",
+  "Micronesia",
+  "Moldova",
+  "Monaco",
+  "Mongolia",
+  "Montenegro",
+  "Morocco",
+  "Mozambique",
+  "Myanmar",
+  "Namibia",
+  "Nauru",
+  "Nepal",
+  "Netherlands",
+  "New Zealand",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "North Macedonia",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Palau",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Peru",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Qatar",
+  "Romania",
+  "Russia",
+  "Rwanda",
+  "Saint Kitts and Nevis",
+  "Saint Lucia",
+  "Saint Vincent",
+  "Samoa",
+  "San Marino",
+  "Sao Tome",
+  "Saudi Arabia",
+  "Senegal",
+  "Serbia",
+  "Seychelles",
+  "Sierra Leone",
+  "Singapore",
+  "Slovakia",
+  "Slovenia",
+  "Solomon Islands",
+  "Somalia",
+  "South Africa",
+  "South Sudan",
+  "Spain",
+  "Sri Lanka",
+  "Sudan",
+  "Suriname",
+  "Sweden",
+  "Switzerland",
+  "Syria",
+  "Taiwan",
+  "Tajikistan",
+  "Tanzania",
+  "Thailand",
+  "Timor-Leste",
+  "Togo",
+  "Tonga",
+  "Trinidad",
+  "Tunisia",
+  "Turkey",
+  "Turkmenistan",
+  "Tuvalu",
+  "Uganda",
+  "Ukraine",
+  "UAE",
+  "UK",
+  "USA",
+  "Uruguay",
+  "Uzbekistan",
+  "Vanuatu",
+  "Vatican City",
+  "Venezuela",
+  "Vietnam",
+  "Yemen",
+  "Zambia",
+  "Zimbabwe",
+];
+
 const CityForm = ({ onAddCity }) => {
-  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [country, setCountry] = useState("India");
   const [img, setImg] = useState(null);
-  const [imageFile, setImageFile] = useState(null);
+  const [image, setImage] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const fileInputRef = useRef(null); // Reference to the file input
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -57,9 +253,9 @@ const CityForm = ({ onAddCity }) => {
       // Check if the file size is between 10KB and 1MB (1024KB)
       if (fileSizeInKB < 10 || fileSizeInKB > 1024) {
         setErrorMessage("File size must be between 10KB and 1MB.");
-        setImg(null); // Clear any previous image preview
-        setImageFile(null);
-        fileInputRef.current.value = ""; // Clear file input
+        setImg(null);
+        setImage(null);
+        fileInputRef.current.value = "";
         return;
       }
 
@@ -68,7 +264,7 @@ const CityForm = ({ onAddCity }) => {
         setImg(reader.result);
       };
       reader.readAsDataURL(file);
-      setImageFile(file);
+      setImage(file);
     }
   };
 
@@ -76,47 +272,51 @@ const CityForm = ({ onAddCity }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Clear previous messages
     setErrorMessage("");
     setSuccessMessage("");
 
-    // Validate the city name and state
-    if (name.trim() === "") {
-      setErrorMessage("Please enter a city name.");
-      setIsLoading(false);
-      return;
-    }
-    if (state.trim() === "") {
-      setErrorMessage("Please enter a state.");
+    // Capitalize the first letter of city, state, and country
+    const capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1);
+    const capitalizedState = state.charAt(0).toUpperCase() + state.slice(1);
+    const capitalizedCountry =
+      country.charAt(0).toUpperCase() + country.slice(1);
+
+    // Validate form data
+    if (
+      !capitalizedCity.trim() ||
+      !capitalizedState.trim() ||
+      !capitalizedCountry.trim()
+    ) {
+      setErrorMessage("Please fill in all required fields.");
       setIsLoading(false);
       return;
     }
 
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("state", state);
-    if (imageFile) {
-      formData.append("image", imageFile);
-    }
+    formData.append("city", capitalizedCity);
+    formData.append("state", capitalizedState);
+    formData.append("country", capitalizedCountry);
+    if (image) formData.append("image", image);
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/cities/add-city", 
+        "http://localhost:8080/api/locations",
         formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true, 
-        }
+        { withCredentials: true }
       );
 
-      if (response.status === 200 || response.status === 201) {
+      // console.log("Response from server:", response); // Log the response
+
+      // Check for successful response status
+      if (response.status === 201 || response.status === 200) {
         setSuccessMessage("City added successfully!");
-        setName("");
+        setCity("");
         setState("");
+        setCountry("India");
         setImg(null);
-        setImageFile(null);
-        fileInputRef.current.value = ""; // Reset the file input field
-        onAddCity(response.data); // Optionally call a function to update the city list
+        setImage(null);
+        fileInputRef.current.value = "";
+        onAddCity(response.data);
       } else {
         setErrorMessage(response.data?.message || "Failed to add city.");
       }
@@ -130,11 +330,8 @@ const CityForm = ({ onAddCity }) => {
 
   useEffect(() => {
     if (successMessage) {
-      const timer = setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000); // 3 seconds
-
-      return () => clearTimeout(timer); // Cleanup the timer
+      const timer = setTimeout(() => setSuccessMessage(""), 3000);
+      return () => clearTimeout(timer);
     }
   }, [successMessage]);
 
@@ -145,8 +342,8 @@ const CityForm = ({ onAddCity }) => {
         <input
           type="text"
           placeholder="City Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
           className="p-2 border rounded w-full"
           required
         />
@@ -169,35 +366,52 @@ const CityForm = ({ onAddCity }) => {
         </select>
       </div>
       <div className="mb-4">
+        <select
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          className="p-2 border rounded w-full"
+          required
+        >
+          <option value="" disabled>
+            Select Country
+          </option>
+          {countries.map((countryName, index) => (
+            <option key={index} value={countryName}>
+              {countryName}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-4">
         <input
           type="file"
-          accept="image/*"
+          ref={fileInputRef}
+          accept="image/png, image/jpeg"
           onChange={handleFileChange}
-          className="p-2 border rounded w-full"
-          ref={fileInputRef} // Assign the ref to the file input
-          required
+          className="p-2 w-full"
         />
-      </div>
-      {img && (
-        <div className="mb-4">
+        {img && (
           <img
             src={img}
             alt="Preview"
-            className="h-24 w-24 object-cover rounded"
+            className="mt-2 w-32 h-32 object-cover"
           />
-        </div>
+        )}
+      </div>
+      {isLoading ? (
+        <p className="text-blue-500">Adding city...</p>
+      ) : (
+        <button
+          type="submit"
+          className="p-2 px-4 py-2 bg-blue-500 text-white rounded w-full"
+        >
+          Add City
+        </button>
       )}
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-        disabled={isLoading}
-      >
-        {isLoading ? "Adding City..." : "Add City"}
-      </button>
+      {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
       {successMessage && (
-        <div className="mt-4 text-green-500">{successMessage}</div>
+        <p className="text-green-500 mt-2">{successMessage}</p>
       )}
-      {errorMessage && <div className="mt-4 text-red-500">{errorMessage}</div>}
     </form>
   );
 };

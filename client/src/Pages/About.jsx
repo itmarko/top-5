@@ -131,7 +131,7 @@ const OurSelectionProcess = () => {
             List Business
           </h3>
           <p className="text-gray-950 text-center mt-3">
-            Once we've conducted a thorough screening process and determined
+            Once we&aops;ve conducted a thorough screening process and determined
             that your business aligns with our specific selection criteria, we
             will proceed to list your business for a duration of 3 months.
           </p>

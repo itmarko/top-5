@@ -7,9 +7,12 @@ const AllCities = () => {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/cities", {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "http://localhost:8080/api/locations/cities",
+          {
+            withCredentials: true,
+          }
+        );
 
         // Group cities by state
         const groupedCities = response.data.reduce((groups, city) => {
@@ -42,11 +45,11 @@ const AllCities = () => {
                 className="flex flex-col items-center shadow-4xl"
               >
                 <img
-                  src={`data:image/jpeg;base64,${city.image}`} // Assuming the image is stored as base64 in your DB
-                  alt={city.name}
+                  src={`data:image/jpeg;base64,${city.image}`}
+                  alt={city.city}
                   className="rounded-lg shadow-4xl h-32 w-32 md:h-40 md:w-40 lg:h-60 lg:w-60 object-cover"
                 />
-                <p className="mt-2 text-center">{city.name}</p>
+                <p className="mt-2 text-center">{city.city}</p>
               </div>
             ))}
           </div>

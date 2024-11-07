@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 const SidebarContext = createContext();
 const Sidebar = ({ children }) => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   return (
     <>
       <aside className="h-screen flex ">

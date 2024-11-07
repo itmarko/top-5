@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return sessionStorage.getItem("isAuthenticated") === "true";
-  });
-  // const [isAuthenticated, setIsAuthenticated] = useState(true);
+  // const [isAuthenticated, setIsAuthenticated] = useState(() => {
+  //   return sessionStorage.getItem("isAuthenticated") === "true";
+  // });
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const login = () => {
     setIsAuthenticated(true);
