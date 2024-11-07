@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BusinessInfo from "./Businessinfo";
+import BusinessInfo from "./BusinessInfo";
 import ContactInfo from "./ContactInfo";
 import Objective from "./Objective";
 import SocialLinks from "./SocialLinks";
