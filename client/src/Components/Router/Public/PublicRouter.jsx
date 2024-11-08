@@ -21,6 +21,7 @@ import {
   ScrollToTop,
   StudentDetails,
   AddCity,
+  AddCategory,
   TermsAndConditions,
   Explore,
   Form,
@@ -137,6 +138,7 @@ const PublicRouter = () => {
               <Route path="calender" element={<Calender />} />
               <Route path="students" element={<StudentDetails />} />
               <Route path="add-City" element={<AddCity />} />
+              <Route path="add-Category" element={<AddCategory />} />
               <Route path="user-details/:id" element={<UserDetails />} />
               <Route path="edit-details/:id" element={<Update />} />
               {/* Add more nested routes here as needed */}

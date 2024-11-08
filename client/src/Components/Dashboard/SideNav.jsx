@@ -1,6 +1,8 @@
 import Sidebar, { SidebarItem } from "./Sidebar";
 import { FaRegCalendarCheck, FaRegFile } from "react-icons/fa";
 import {
+  Md11Mp,
+  MdCategory,
   MdHelpOutline,
   MdOutlineTask,
   MdReportGmailerrorred,
@@ -37,9 +39,12 @@ const SideNav = ({ onLogout }) => {
             text="Update View"
             dropdownItems={[
               { text: "Add City", link: "add-city" },
-              
+              { text: "Add Category", link: "add-Category" },
+
             ]}
           />
+          {/* this is the category add page link in update view */}
+
           <Link to="students">
             <SidebarItem icon={<FaRegFile size={18} />} text="Project" />
           </Link>
