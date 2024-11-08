@@ -5,6 +5,16 @@ public class AddressDTO {
 	private String street;
 	private String zipCode;
 
+	
+	public AddressDTO() {
+	}
+
+	public AddressDTO(Long id, String street, String zipCode) {
+		this.id = id;
+		this.street = street;
+		this.zipCode = zipCode;
+	}
+
 	public Long getId() {
 		return id;
 	}
