@@ -80,7 +80,7 @@ const PublicRouter = () => {
             }
           />
           <Route
-            path="/local-businesses"
+            path="/local-businesses/:id"
             element={
               <PublicLayout>
                 <LocalBusiness />

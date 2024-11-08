@@ -62,7 +62,7 @@ const HeroSection = () => {
                 className="w-full p-2 pl-8 pr-10 border-none outline-none rounded-md"
               />
               <svg
-              className="absolute right-0 top-1/2  transform -translate-y-1/2 h-6 w-6 text-gray-500"
+                className="absolute right-0 top-1/2  transform -translate-y-1/2 h-6 w-6 text-gray-500"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="-2.5 -2.5 24 24"
                 width="28"
@@ -94,7 +94,7 @@ const HeroSection = () => {
               </svg>
             </div>
 
-            <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl  focus:outline-none focus:from-fuchsia-600 dark:focus:to-blue-800  p-1 md:px-6 rounded-md mt-4 md:mt-0">
+            <button className="text-white bg-gradient-to-br from-purple-600 to-blue-700 hover:bg-gradient-to-bl  focus:outline-none hover:from-purple-600 hover:to-blue-800  p-2 md:px-6 rounded-md mt-4 md:mt-0">
               Search now
             </button>
           </div>
@@ -105,21 +105,33 @@ const HeroSection = () => {
           </p>
 
           {/* City Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-white max-w-6xl mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 text-white max-w-6xl mx-auto mb-6">
             {cities.map((city, index) => (
-              <div key={index} className="flex flex-col items-center">
+              <Link
+              to={`/local-businesses/${city.id}`}
+              key={index}
+              className="flex flex-col items-center group"
+            >
+              <div className="flex flex-col items-center">
                 <img
-                  src={`data:image/jpeg;base64,${city.image}`} // Assuming the image is stored as base64 in your DB
+                  src={`data:image/jpeg;base64,${city.image}`}
                   alt={city.city}
-                  className="rounded-lg shadow-xl h-24 w-44 md:h-52 md:w-44 object-cover"
+                  className="rounded-lg shadow-xl h-24 w-44 sm:h-28 sm:w-36 md:h-52 md:w-44 object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out"
                 />
-                <p className="mt-2 font-bold text-xl">{city.city}</p>
+                <p className="mt-2 text-sm sm:text-lg md:text-xl font-bold group-hover:text-teal-500 group-hover:bg-teal-100 p-2 rounded transition-all duration-300 ease-in-out">
+                  {city.city}
+                </p>
               </div>
+            </Link>
+            
             ))}
-            <div className="flex flex-col items-center bg-blue-600 h-24 w-24 md:h-52 md:w-44 rounded-lg shadow-xl">
-              <p className="text-white mt-16">Explore more city</p>
+
+            <div className="flex flex-col items-center bg-blue-600 h-24 w-44 sm:h-28 sm:w-36 md:h-52 md:w-44  rounded-lg shadow-xl">
+              <p className="text-white mt-4 sm:mt-8 lg:mt-12 text-sm sm:text-lg">
+                Explore more city
+              </p>
               <Link to="/explore-city">
-                <button className="bg-yellow-400 text-black mt-2 px-4 py-2 rounded">
+                <button className="bg-yellow-400 text-black mt-2 px-4 py-2 rounded text-xs sm:text-sm md:text-base">
                   Explore all
                 </button>
               </Link>

@@ -48,7 +48,7 @@ public class CityController {
 		List<CityResponseDTO> response = cities.stream()
 //				.map(city -> new CityResponseDTO(city.getState().getCountry().getCountry(), city.getState().getState(),
 //						city.getCity(), city.getImage()))
-				.map(city -> new CityResponseDTO(city.getCity(), city.getImage())).toList();
+				.map(city -> new CityResponseDTO(city.getId(),city.getCity(), city.getImage())).toList();
 
 		return response;
 	}
@@ -65,7 +65,7 @@ public class CityController {
 //	                cityData.getCity(),
 //	                cityData.getImage()
 //	            );
-			CityResponseDTO responseDTO = new CityResponseDTO(cityData.getCity(), cityData.getImage());
+			CityResponseDTO responseDTO = new CityResponseDTO(cityData.getId(),cityData.getCity(), cityData.getImage());
 
 			return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 		} else {
