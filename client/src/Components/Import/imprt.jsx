@@ -22,6 +22,7 @@ import QuickLinks from "../Dashboard/QuickLinks";
 import StudentDetails from "../Dashboard/Tables/StudentDetails";
 import AddCity from "../Elements/Register/AddCity"
 import AddCategory from "../Elements/Register/AddCategory"
+import AddSubCategory from "../Elements/Register/AddSubCategory"
 import TermsAndConditions from "../../Pages/Termandc/TermsAndConditions";
 
 // import chat
@@ -56,6 +57,7 @@ export {
   TermsAndConditions,
   AddCity,
   AddCategory,
+  AddSubCategory,
   Businesscard,
   Business,
   Form,

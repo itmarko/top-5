@@ -22,6 +22,7 @@ import {
   StudentDetails,
   AddCity,
   AddCategory,
+  AddSubCategory,
   TermsAndConditions,
   Explore,
   Form,
@@ -139,6 +140,7 @@ const PublicRouter = () => {
               <Route path="students" element={<StudentDetails />} />
               <Route path="add-City" element={<AddCity />} />
               <Route path="add-Category" element={<AddCategory />} />
+              <Route path="add-SubCategory" element={<AddSubCategory />} />
               <Route path="user-details/:id" element={<UserDetails />} />
               <Route path="edit-details/:id" element={<Update />} />
               {/* Add more nested routes here as needed */}

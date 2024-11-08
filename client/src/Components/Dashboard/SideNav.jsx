@@ -40,7 +40,7 @@ const SideNav = ({ onLogout }) => {
             dropdownItems={[
               { text: "Add City", link: "add-city" },
               { text: "Add Category", link: "add-Category" },
-
+              { text: "Add SubCategory", link: "add-SubCategory" },  
             ]}
           />
           {/* this is the category add page link in update view */}
